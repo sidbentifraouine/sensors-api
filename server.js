@@ -5,8 +5,9 @@ var io = require('socket.io')(server)
 server.listen(3000, '172.20.10.8')
 
 io.on('connection', (socket) => {
-  console.log('👌  Connected...')
+  console.log('👌  CONNECTED  👌')
 
+  // Smartphone
   socket.on('accelerometer', (data) => {
     console.log('🏎  Accelerometer: ', data)
   })
@@ -23,7 +24,7 @@ io.on('connection', (socket) => {
     console.log('🦶  Pedometer: ', data)
   })
 
-  // Eye node
+  // Sensor
   socket.on('luminosity', (data) => {
     console.log('💡  Luminosity', data)
   })
