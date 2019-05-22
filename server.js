@@ -25,7 +25,11 @@ io.on('connection', (socket) => {
   })
 
   // Sensor
-  socket.on('Luminance', (data) => {
+  socket.on('luminance', (data) => {
     console.log('💡 Luminosity', data)
+  })
+
+  socket.on('temperature', (data) => {
+    console.log('🔥 Temperature', data)
   })
 })
