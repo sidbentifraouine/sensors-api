@@ -7,7 +7,7 @@ server.listen(3000, () => {
 })
 
 io.on('connection', (socket) => {
-  console.log('👌  CONNECTED  👌')
+  console.log(`🤝  ${socket.handshake.address} is connected`)
 
   // Smartphone
   socket.on('accelerometer', (data) => {
