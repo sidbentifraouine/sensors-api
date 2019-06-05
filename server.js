@@ -13,29 +13,18 @@ io.on('connection', (socket) => {
     } is connected`
   )
 
-  // Smartphone
-  socket.on('accelerometer', (data) => {
-    console.log('🏎  Accelerometer: ', data)
+  socket.on('smartphone', (data) => {
+    console.log('📱 SMARTPHONE: ', data)
+    io.emit('smartphone', data)
   })
 
-  socket.on('gyroscope', (data) => {
-    console.log('🌍  Gyroscope: ', data)
+  socket.on('eye', (data) => {
+    console.log('👁  EYE: ', data)
+    io.emit('eye', data)
   })
 
-  socket.on('pedometer', (data) => {
-    console.log('🦶  Pedometer: ', data)
-  })
-
-  socket.on('pedometer', (data) => {
-    console.log('🦶  Pedometer: ', data)
-  })
-
-  // Sensor
-  socket.on('luminance', (data) => {
-    console.log('💡 Luminosity', data)
-  })
-
-  socket.on('temperature', (data) => {
-    console.log('🔥 Temperature', data)
+  socket.on('wallplug', (data) => {
+    console.log('🔌  WALLPLUG: ', data)
+    io.emit('wallplug', data)
   })
 })
