@@ -1,14 +1,28 @@
 var app = require('express')()
 var server = require('http').createServer(app)
+var bodyParser = require('body-parser')
 var io = require('socket.io')(server)
 var notifyAlexa = require('./alexa-order')
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+app.post('/health', (req, res) => {
+  separator()
+  console.log('🗣  RECEIVED ALEXA VALUE: ', req.body.value)
+  res.status(200).send('Everything is fine!')
+  io.emit('alexavalue', req.body.value)
+})
 
 server.listen(3000, () => {
   console.log('✅  The Server is running on port', 3000)
 })
 
 function separator() {
-  console.log('\n---------------------\n')
+  console.log(`\n>  ${new Date()}`)
 }
 
 io.on('connection', (socket) => {
@@ -43,11 +57,11 @@ io.on('connection', (socket) => {
     notifyAlexa()
       .then((result) => {
         separator()
-        console.log('✅  ORDER SENT SUCCESSFULLY', result)
+        console.log('✅  ORDER SENT SUCCESSFULLY: ', result)
       })
       .catch((err) => {
         separator()
-        console.log('❌  ORDER NOT SENT', err)
+        console.log('❌  ORDER NOT SENT: ', err)
       })
   })
 })
